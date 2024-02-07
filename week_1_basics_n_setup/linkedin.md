@@ -1,0 +1,1 @@
+I want to share with you that I've just finished my first homework assignment at "Data Engineering Zoomcamp". A few things were new to me. First of all, there was Codespace. It is a pretty convenient workspace. The second new thing for me was Terraform. Now, I know how to create a Google Storage Bucket and a Google BigQuery Dataset using code. #dezoomcamp

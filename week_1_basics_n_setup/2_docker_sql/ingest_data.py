@@ -8,6 +8,22 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 def main(params):
+    """
+    Ingests data from a CSV file into a PostgreSQL database table.
+
+    Args:
+        params (dict): A dictionary containing the following parameters:
+            - user (str): The username for the PostgreSQL database.
+            - password (str): The password for the PostgreSQL database.
+            - host (str): The host address of the PostgreSQL database.
+            - port (int): The port number of the PostgreSQL database.
+            - db (str): The name of the PostgreSQL database.
+            - table_name (str): The name of the table to insert the data into.
+            - url (str): The URL of the CSV file to download.
+
+    Returns:
+        None
+    """
     user = params.user
     password = params.password 
     host = params.host
@@ -35,17 +51,19 @@ def main(params):
     df.to_sql(name=table_name, con=engine, if_exists='append')
 
     while True:
-        t_start = time()
-        df = next(df_iter)
-        
-        df.lpep_pickup_datetime = pd.to_datetime(df.lpep_pickup_datetime)
-        df.lpep_dropoff_datetime = pd.to_datetime(df.lpep_dropoff_datetime)
+        try:
+            t_start = time()
+            df = next(df_iter)
+            
+            df.lpep_pickup_datetime = pd.to_datetime(df.lpep_pickup_datetime)
+            df.lpep_dropoff_datetime = pd.to_datetime(df.lpep_dropoff_datetime)
 
-        df.to_sql(name=table_name, con=engine, if_exists='append')
+            df.to_sql(name=table_name, con=engine, if_exists='append')
 
-        t_end = time()
-        print(f'insert another chunk..., took {(t_end - t_start)} seconds')
-
+            t_end = time()
+            print(f'insert another chunk..., took {(t_end - t_start)} seconds')
+        except StopIteration:
+            break
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Ingest CSV data to postgres')

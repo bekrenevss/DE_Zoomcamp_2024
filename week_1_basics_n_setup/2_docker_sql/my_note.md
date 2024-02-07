@@ -42,7 +42,6 @@ docker run -it \
   dpage/pgadmin4
 
 ## run ingest_data.py
-
 URL="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-09.csv.gz"
 
 python ingest_data.py \
