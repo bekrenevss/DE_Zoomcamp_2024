@@ -5,3 +5,4 @@ week_1_basics_n_setup/2_docker_sql/ny_taxi_postgres_data/
 week_1_basics_n_setup/2_docker_sql/nytaxi_postgres_data/
 week_1_basics_n_setup/2_docker_sql/*.gz
 week_1_basics_n_setup/2_docker_sql/*.csv
+keys/
